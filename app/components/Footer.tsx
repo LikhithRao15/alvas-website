@@ -12,61 +12,6 @@ export default function Footer() {
       yearElement.textContent = new Date().getFullYear().toString()
     }
 
-    // Slider logic remains untouched
-    const slider = document.getElementById('step-slider')
-    if (slider) {
-      let cards = Array.from(document.querySelectorAll('.step-card'))
-      const gap = 24
-      const cardWidth = cards[0].offsetWidth + gap
-      const totalWidth = cardWidth * cards.length
-
-      cards.forEach((card) => {
-        const clone = card.cloneNode(true)
-        slider.appendChild(clone)
-      })
-
-      cards = Array.from(document.querySelectorAll('.step-card'))
-      let position = 0
-      const speed = 0.6 
-      let isPaused = false
-
-      const sliderWrapper = slider.parentElement
-      if (sliderWrapper) {
-        sliderWrapper.addEventListener('mouseenter', () => (isPaused = true))
-        sliderWrapper.addEventListener('mouseleave', () => (isPaused = false))
-        sliderWrapper.addEventListener('touchstart', () => (isPaused = true), { passive: true })
-        sliderWrapper.addEventListener('touchend', () => (isPaused = false), { passive: true })
-      }
-
-      function animate() {
-        if (!isPaused) {
-          position -= speed
-          if (Math.abs(position) >= totalWidth) position = 0
-          slider.style.transform = `translateX(${position}px)`
-        }
-        updateCenterCard()
-        requestAnimationFrame(animate)
-      }
-
-      function updateCenterCard() {
-        const sliderRect = slider.parentElement?.getBoundingClientRect()
-        if (!sliderRect) return
-        const centerX = sliderRect.left + sliderRect.width / 2
-
-        cards.forEach((card) => {
-          const rect = card.getBoundingClientRect()
-          const cardCenter = rect.left + rect.width / 2
-          const distance = Math.abs(centerX - cardCenter)
-
-          if (distance < rect.width / 2) {
-            gsap.to(card, { scale: 1.1, y: -12, opacity: 1, duration: 0.3, ease: 'power3.out' })
-          } else {
-            gsap.to(card, { scale: 1, y: 0, opacity: 0.85, duration: 0.3, ease: 'power3.out' })
-          }
-        })
-      }
-      animate()
-    }
   }, [])
 
   return (

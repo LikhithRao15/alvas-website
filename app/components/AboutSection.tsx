@@ -58,8 +58,8 @@ export default function AboutSection() {
     }
 
     if (container && window.innerWidth > 1024) {
-      container.addEventListener('mousemove', handleMouseMove)
-      container.addEventListener('mouseleave', handleMouseLeave)
+      container.addEventListener('mousemove', handleMouseMove as EventListener)
+      container.addEventListener('mouseleave', handleMouseLeave as EventListener)
     }
 
     // Reveal animation
@@ -78,8 +78,8 @@ export default function AboutSection() {
 
     return () => {
       if (container) {
-        container.removeEventListener('mousemove', handleMouseMove)
-        container.removeEventListener('mouseleave', handleMouseLeave)
+        container.removeEventListener('mousemove', handleMouseMove as EventListener)
+        container.removeEventListener('mouseleave', handleMouseLeave as EventListener)
       }
     }
   }, [])
