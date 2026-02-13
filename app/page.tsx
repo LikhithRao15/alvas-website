@@ -15,6 +15,7 @@ import CampusHighlights from './components/CampusHighlights'
 import CampusDiaries from './components/CampusDiaries'
 import Testimonials from './components/Testimonials'
 
+
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -40,10 +41,12 @@ export default function Home() {
         <MarqueeBar />
         <AboutSection />
         <ProgramsSection />
-        <CampusDiaries />
+        {/* <CampusDiaries /> */}
+
         <CampusHighlights />
         <Testimonials />
         <Footer />
+        
       </main>
     </>
   )

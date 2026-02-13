@@ -6,10 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 248, 250, 252;
   --background-end-rgb: 248, 250, 252;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
+  --nav-cream: 255, 250, 240;
+  --nav-mustard: 183, 119, 0;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -18,14 +16,9 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-/* Functional classes for 3D and Reveal Effects */
-.text-mask { overflow: hidden; display: block; line-height: 1.2; padding-bottom: 5px; }
-.perspective-container { perspective: 1000px; }
-.transform-style-3d { transform-style: preserve-3d; }
-.translate-z-20 { transform: translateZ(40px); }
-.translate-z-10 { transform: translateZ(20px); }
-
-/* Navbar Scroll Styling */
+/* ============================================ */
+/* NAVBAR SCROLL STYLING - PRESERVED */
+/* ============================================ */
 .header-scrolled {
   background-color: rgba(255, 255, 255, 0.98) !important;
   backdrop-filter: blur(20px) !important;
@@ -35,4 +28,483 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
 
-.mobile-menu-open { transform: translateX(0) !important; }
+.mobile-menu-open {
+  transform: translateX(0) !important;
+}
+
+/* ============================================ */
+/* MAIN NAVIGATION - ALL TABS VISIBLE, NO WRAPPING */
+/* ============================================ */
+#nav-links {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  white-space: nowrap !important;
+}
+
+.nav-btn {
+  font-size: 0.7rem !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  white-space: nowrap !important;
+}
+
+/* ============================================ */
+/* FULL-WIDTH MEGA MENU - ALL TABS */
+/* WITH LEFT/RIGHT SPACING - CLEAN CARD DESIGN */
+/* ============================================ */
+
+/* ALL MEGA MENUS - About, Admissions, Academics, Research, Placements, Campus Life */
+.dropdown-menu {
+  position: fixed !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 4rem) !important;
+  max-width: 1200px !important;
+  min-width: 300px !important;
+  background: white !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid #edf2f7 !important;
+  border-top: 3px solid rgb(var(--nav-mustard)) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  z-index: 9999 !important;
+  margin-top: 0.75rem !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+}
+
+/* Inner container padding - consistent for all mega menus */
+.dropdown-menu > div {
+  padding: 2rem 2.5rem !important;
+}
+
+/* ============================================ */
+/* GRID LAYOUT - EXACTLY LIKE THE IMAGE */
+/* 3-COLUMN GRID WITH PROPER HIERARCHY */
+/* ============================================ */
+
+/* ALL MEGA MENUS - 3-column grid */
+.dropdown-menu .grid-cols-3 {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2.5rem !important;
+  width: 100% !important;
+}
+
+/* ============================================ */
+/* TYPOGRAPHY - EXACTLY LIKE THE IMAGE */
+/* CLEAN, READABLE, PROPER HIERARCHY */
+/* ============================================ */
+
+/* MAIN SECTION HEADERS - Like "ADMISSION PROCEDURE", "FEES STRUCTURES", "SCHOLARSHIPS" */
+.dropdown-menu h3 {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  margin-top: 0 !important;
+}
+
+/* SUB-HEADERS - Not used in Admissions but kept for other tabs */
+.dropdown-menu h4 {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: #334155 !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* MAIN LINKS - Like "Admission Through KCET", "KCET Students", "List of Scholarships Schemes" */
+.dropdown-menu a {
+  display: block !important;
+  font-size: 0.9rem !important;
+  font-weight: 450 !important;
+  color: #475569 !important;
+  padding: 0.25rem 0 !important;
+  margin: 0 !important;
+  transition: all 0.15s ease !important;
+  line-height: 1.5 !important;
+  text-decoration: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+/* NESTED LINKS - For other tabs with indentation */
+.dropdown-menu .pl-2 a,
+.dropdown-menu .border-l-2 a,
+.dropdown-menu [class*="pl-"] a {
+  font-size: 0.85rem !important;
+  padding: 0.2rem 0 0.2rem 0.75rem !important;
+  color: #64748b !important;
+  border-left: 2px solid #e2e8f0 !important;
+  margin-left: 0 !important;
+}
+
+/* HOVER STATE - Subtle color change and slight indent */
+.dropdown-menu a:hover {
+  color: rgb(var(--nav-mustard)) !important;
+  padding-left: 0.25rem !important;
+  background: transparent !important;
+}
+
+/* Nested links hover */
+.dropdown-menu .pl-2 a:hover,
+.dropdown-menu .border-l-2 a:hover {
+  border-left-color: rgb(var(--nav-mustard)) !important;
+}
+
+/* ============================================ */
+/* ADMISSIONS - NOW FULL WIDTH 3-COLUMN MEGA MENU */
+/* ============================================ */
+
+/* Admissions - override any remaining compact styles */
+.group:nth-child(2) .dropdown-menu {
+  position: fixed !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 4rem) !important;
+  max-width: 1200px !important;
+  min-width: 300px !important;
+  margin-top: 0.75rem !important;
+  padding: 0 !important;
+}
+
+.group:nth-child(2) .dropdown-menu > div {
+  padding: 2rem 2.5rem !important;
+}
+
+/* Admissions headers - exactly like other tabs */
+.group:nth-child(2) .dropdown-menu h3 {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  margin-top: 0 !important;
+}
+
+/* Admissions links - exactly like other tabs */
+.group:nth-child(2) .dropdown-menu a {
+  display: block !important;
+  font-size: 0.9rem !important;
+  font-weight: 450 !important;
+  color: #475569 !important;
+  padding: 0.25rem 0 !important;
+  margin: 0 !important;
+  transition: all 0.15s ease !important;
+  line-height: 1.5 !important;
+  text-decoration: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+/* Admissions hover - exactly like other tabs */
+.group:nth-child(2) .dropdown-menu a:hover {
+  color: rgb(var(--nav-mustard)) !important;
+  padding-left: 0.25rem !important;
+  background: transparent !important;
+}
+
+/* Remove any remaining compact styles from Admissions */
+.group:nth-child(2) .dropdown-menu h4,
+.group:nth-child(2) .dropdown-menu .font-bold,
+.group:nth-child(2) .dropdown-menu .px-4,
+.group:nth-child(2) .dropdown-menu .py-2,
+.group:nth-child(2) .dropdown-menu .pl-6,
+.group:nth-child(2) .dropdown-menu .space-y-1,
+.group:nth-child(2) .dropdown-menu .mt-2 {
+  all: unset !important;
+}
+
+/* Restore proper spacing for Admissions columns */
+.group:nth-child(2) .dropdown-menu .space-y-4 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+.group:nth-child(2) .dropdown-menu .space-y-1 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+/* ============================================ */
+/* ACADEMICS - SPECIFIC ADJUSTMENTS */
+/* ============================================ */
+
+/* Department Resources as nested links with border */
+.group:nth-child(3) .border-l-2 {
+  border-left: 2px solid #e2e8f0 !important;
+  padding-left: 0.75rem !important;
+  margin-left: 0 !important;
+}
+
+/* ============================================ */
+/* RESEARCH - 3-COLUMN GRID */
+/* ============================================ */
+
+/* Already handled by global .dropdown-menu .grid-cols-3 */
+
+/* ============================================ */
+/* PLACEMENTS - 3-COLUMN GRID */
+/* ============================================ */
+
+/* Already handled by global .dropdown-menu .grid-cols-3 */
+
+/* ============================================ */
+/* CAMPUS LIFE - SPECIFIC ADJUSTMENTS */
+/* ============================================ */
+
+/* Clubs & Activities - scrollable */
+.group:nth-child(6) .max-h-96 {
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  padding-right: 0.75rem !important;
+}
+
+/* Club links */
+.group:nth-child(6) .max-h-96 a {
+  font-size: 0.85rem !important;
+  padding: 0.2rem 0 !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+/* Nested sections in Campus Life */
+.group:nth-child(6) .border-l-2 {
+  border-left: 2px solid #e2e8f0 !important;
+  padding-left: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* ============================================ */
+/* SCROLLBAR STYLING - SUBTLE */
+/* ============================================ */
+.overflow-y-auto::-webkit-scrollbar,
+.max-h-96::-webkit-scrollbar,
+.max-h-80::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track,
+.max-h-96::-webkit-scrollbar-track,
+.max-h-80::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb,
+.max-h-96::-webkit-scrollbar-thumb,
+.max-h-80::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.max-h-96::-webkit-scrollbar-thumb:hover,
+.max-h-80::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* ============================================ */
+/* HOVER STATES - SMOOTH */
+/* ============================================ */
+.group:hover .dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* All mega menus - centered transform on hover - INCLUDING ADMISSIONS NOW */
+.group:hover .dropdown-menu {
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+/* ============================================ */
+/* HEADER POSITIONING */
+/* ============================================ */
+#main-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9998 !important;
+}
+
+.container {
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+/* ============================================ */
+/* RESPONSIVE BREAKPOINTS */
+/* ============================================ */
+
+/* Tablets - hide mega menus */
+@media (max-width: 1024px) {
+  .dropdown-menu {
+    display: none !important;
+  }
+}
+
+/* Small desktops - reduce padding and gap */
+@media (max-width: 1280px) {
+  .dropdown-menu {
+    width: calc(100% - 2rem) !important;
+  }
+  
+  .dropdown-menu > div {
+    padding: 1.5rem !important;
+  }
+  
+  .dropdown-menu .grid-cols-3 {
+    gap: 1.5rem !important;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: calc(100% - 1rem) !important;
+  }
+  
+  .dropdown-menu > div {
+    padding: 1.25rem !important;
+  }
+  
+  .dropdown-menu .grid-cols-3 {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* ============================================ */
+/* REMOVE ALL UNWANTED STYLES */
+/* ============================================ */
+
+/* Remove background colors and unwanted hover effects */
+.bg-\[\#f8fafc\],
+.hover\:bg-\[\#f8fafc\],
+.bg-slate-100,
+.hover\:bg-slate-100,
+.bg-gray-50,
+.hover\:bg-gray-50 {
+  background: transparent !important;
+}
+
+/* Remove unwanted padding shifts - keep only subtle 0.25rem shift */
+.hover\:pl-1,
+.hover\:pl-2,
+.hover\:pl-3,
+.hover\:pl-4,
+.hover\:pl-5 {
+  padding-left: 0.25rem !important;
+}
+
+/* Remove unwanted rounded corners on links */
+.rounded:not(.dropdown-menu > div) {
+  border-radius: 0 !important;
+}
+
+/* Remove unwanted shadows - keep only dropdown container shadow */
+.shadow-sm,
+.shadow-md,
+.shadow-lg {
+  box-shadow: none !important;
+}
+
+/* Keep shadow only on dropdown container */
+.dropdown-menu {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Remove all borders except section headers and nested indicators */
+.border-b:not(h3.border-b) {
+  border-bottom: none !important;
+}
+
+.border-t:not(.dropdown-menu) {
+  border-top: none !important;
+}
+
+.border-r,
+.border-l {
+  border: none !important;
+}
+
+/* Keep left border only for nested items */
+.border-l-2 {
+  border-left: 2px solid #e2e8f0 !important;
+}
+
+/* Disable all submenus */
+.submenu-wrapper,
+.dropdown-submenu,
+.has-submenu,
+.sub-menu,
+.children,
+.dropdown-menu .dropdown-menu {
+  display: none !important;
+}
+
+/* ============================================ */
+/* UTILITY CLASSES */
+/* ============================================ */
+
+/* Consistent spacing for vertical lists */
+.space-y-1 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+.space-y-2 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+}
+
+.space-y-3 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.space-y-4 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+/* Ensure proper text color for scrolled state */
+.header-scrolled .nav-btn {
+  color: rgb(var(--nav-mustard)) !important;
+}
+
+.header-scrolled .nav-btn:hover {
+  color: rgb(var(--nav-mustard)) !important;
+}
+
+/* ============================================ */
+/* PRINT STYLES */
+/* ============================================ */
+@media print {
+  .dropdown-menu {
+    display: none !important;
+  }
+  
+  #main-header {
+    position: relative !important;
+  }
+}
