@@ -27,7 +27,7 @@ export default function Footer() {
             <div className="col-span-2 lg:col-span-2">
               <div className="flex items-center gap-4 mb-6">
                 <img
-                  src="/logos/alvaslogo.png"
+                  src="https://alvascentralschool001.42web.io/wp-content/uploads/2026/01/alvas-org-logo-white.png"
                   alt="Alvas Logo"
                   className="w-16 h-19 object-contain drop-shadow-xl"
                 />

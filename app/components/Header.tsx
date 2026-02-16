@@ -23,6 +23,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   const placementsGroupRef = useRef<HTMLDivElement>(null);
   const campusGroupRef = useRef<HTMLDivElement>(null);
   const admissionsGroupRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   // Create refs for ALL dropdowns
   const aboutDropdownRef = useRef<HTMLDivElement>(null);
@@ -96,6 +97,10 @@ export default function Header({ onMenuToggle }: HeaderProps) {
     const header = headerRef.current;
     if (!header) return;
 
+    // Controllers for cleanup
+    const controllers = new AbortController();
+    const { signal } = controllers;
+
     // Array of all mega menu groups and their dropdowns
     const megaMenus = [
       { group: aboutGroupRef.current, dd: aboutDropdownRef.current },
@@ -107,27 +112,81 @@ export default function Header({ onMenuToggle }: HeaderProps) {
     ];
 
     function positionDropdown(dd: HTMLElement) {
-      if (!dd || !header) return;
+      const nav = navRef.current;
+      if (!dd || !nav) return;
 
-      const headerRect = header.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
 
-      // Position dropdown centered under header with spacing
       dd.style.position = "fixed";
       dd.style.left = "50%";
-      dd.style.transform = "translateX(-50%)";
-      dd.style.width = "calc(100% - 4rem)";
+      dd.style.width = "100%";
       dd.style.maxWidth = "1200px";
-      dd.style.top = `${headerRect.bottom - 4}px`;
+
+      // ✅ Anchor dropdown to NAV (stable height)
+      dd.style.setProperty("top", `${navRect.bottom - 0.5}px`, "important");
     }
 
-    function onEnter(group: HTMLElement, dd: HTMLElement) {
+    // === MEGA MENU STATE ===
+    let activeMenu: HTMLElement | null = null;
+    let activeGroup: HTMLElement | null = null;
+    let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function isInside(el: HTMLElement | null, target: Node | null) {
+      return !!el && !!target && el.contains(target);
+    }
+
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+        if (!activeMenu) return;
+
+        const target = e.target as Node;
+
+        // If mouse is inside ACTIVE TAB GROUP OR inside active dropdown → do nothing
+        if (isInside(activeGroup, target) || isInside(activeMenu, target)) {
+          if (closeTimer) {
+            clearTimeout(closeTimer);
+            closeTimer = null;
+          }
+          return;
+        }
+
+        // Delay closure slightly to bridge accidental gaps (e.g. while moving from tab to card)
+        if (!closeTimer && activeMenu) {
+          closeTimer = setTimeout(() => {
+            if (activeMenu) closeMenu(activeMenu);
+            closeTimer = null;
+          }, 100); // 100ms bridge remains snappy but prevents flicker
+        }
+      },
+      { passive: true, signal },
+    );
+
+    function openMenu(group: HTMLElement, dd: HTMLElement) {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+
+      if (activeMenu && activeMenu !== dd) {
+        closeMenu(activeMenu);
+      }
+
       positionDropdown(dd);
 
-      dd.style.opacity = "1";
-      dd.style.visibility = "visible";
-      dd.style.pointerEvents = "auto";
+      dd.style.setProperty("opacity", "1", "important");
+      dd.style.setProperty("visibility", "visible", "important");
+      dd.style.setProperty("pointer-events", "auto", "important");
+      dd.style.setProperty(
+        "transform",
+        "translateX(-50%) translateY(0)",
+        "important",
+      );
 
-      // Update button color based on scroll state
+      activeMenu = dd;
+      activeGroup = group;
+
+      // Update button color
       const btn = group.querySelector("button");
       if (btn) {
         const headerEl = headerRef.current;
@@ -138,64 +197,73 @@ export default function Header({ onMenuToggle }: HeaderProps) {
       }
     }
 
-    function onLeave(dd: HTMLElement, group: HTMLElement) {
-      dd.style.opacity = "";
-      dd.style.visibility = "";
-      dd.style.pointerEvents = "";
-      dd.style.position = "";
-      dd.style.left = "";
-      dd.style.top = "";
-      dd.style.width = "";
-      dd.style.transform = "";
-      dd.style.maxWidth = "";
+    function closeMenu(dd: HTMLElement) {
+      dd.style.setProperty("opacity", "0", "important");
+      dd.style.setProperty("visibility", "hidden", "important");
+      dd.style.setProperty("pointer-events", "none", "important");
+      dd.style.setProperty(
+        "transform",
+        "translateX(-50%) translateY(6px)",
+        "important",
+      );
 
-      const btn = group.querySelector("button");
-      if (btn) btn.style.color = "";
+      if (activeMenu === dd) {
+        // Reset button colors when menu closes
+        megaMenus.forEach(({ group, dd: menuDd }) => {
+          if (menuDd === dd) {
+            const btn = group?.querySelector("button");
+            if (btn) btn.style.color = "";
+          }
+        });
+        activeMenu = null;
+        activeGroup = null;
+      }
     }
 
     // Attach event listeners to all mega menus
+
     megaMenus.forEach(({ group, dd }) => {
       if (!group || !dd) return;
 
-      const handleEnter = () => onEnter(group, dd);
-      const handleLeave = () => onLeave(dd, group);
+      const handleEnter = () => openMenu(group, dd);
 
-      group.addEventListener("mouseenter", handleEnter);
-      group.addEventListener("mouseleave", handleLeave);
-      group.addEventListener("focusin", handleEnter);
-      group.addEventListener("focusout", handleLeave);
-      dd.addEventListener("mouseenter", handleEnter);
-      dd.addEventListener("mouseleave", handleLeave);
+      const handleLeave = (e: Event) => {
+        const related = (e as MouseEvent).relatedTarget as Node;
+        if (group.contains(related) || dd.contains(related)) return;
+        closeMenu(dd);
+      };
 
-      window.addEventListener("resize", () => {
-        if (dd.style.visibility === "visible") {
-          positionDropdown(dd);
-        }
-      });
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (dd.style.visibility === "visible") {
-            positionDropdown(dd);
-          }
-        },
-        { passive: true },
-      );
+      group.addEventListener("mouseenter", handleEnter, { signal });
+
+      dd.addEventListener("mouseenter", handleEnter, { signal });
     });
 
-    return () => {
-      megaMenus.forEach(({ group, dd }) => {
-        if (!group || !dd) return;
+    window.addEventListener(
+      "resize",
+      () => {
+        megaMenus.forEach(({ dd }) => {
+          if (dd && dd.style.visibility === "visible") {
+            positionDropdown(dd);
+          }
+        });
+      },
+      { signal },
+    );
 
-        group.removeEventListener("mouseenter", () => onEnter(group, dd));
-        group.removeEventListener("mouseleave", () => onLeave(dd, group));
-        group.removeEventListener("focusin", () => onEnter(group, dd));
-        group.removeEventListener("focusout", () => onLeave(dd, group));
-        dd.removeEventListener("mouseenter", () => onEnter(group, dd));
-        dd.removeEventListener("mouseleave", () => onLeave(dd, group));
-      });
-      window.removeEventListener("resize", () => {});
-      window.removeEventListener("scroll", () => {});
+    window.addEventListener(
+      "scroll",
+      () => {
+        megaMenus.forEach(({ dd }) => {
+          if (dd && dd.style.visibility === "visible") {
+            positionDropdown(dd);
+          }
+        });
+      },
+      { passive: true, signal },
+    );
+
+    return () => {
+      controllers.abort();
     };
   }, []);
 
@@ -214,13 +282,20 @@ export default function Header({ onMenuToggle }: HeaderProps) {
         <div className="flex gap-6">
           <span className="hover:text-[#b77a00] cursor-pointer transition">
             <i className="fas fa-envelope mr-2 text-[#b77a00]"></i>
-            info@alvas.edu.in
+            principalaiet08@gmail.com
           </span>
           <span className="hover:text-[#b77a00] cursor-pointer transition">
             <i className="fas fa-phone mr-2 text-[#b77a00]"></i>
-            +91 98765 43210
+            8050579606, 8050585606
+          </span>
+          <span className="hover:text-[#b77a00] cursor-pointer transition">
+            CET CODE-E169
+          </span>
+          <span className="hover:text-[#b77a00] cursor-pointer transition">
+            PGCET CODE-
           </span>
         </div>
+
         <div className="flex gap-6 tracking-wide items-center font-bold">
           <a
             href="#"
@@ -236,9 +311,15 @@ export default function Header({ onMenuToggle }: HeaderProps) {
       </div>
 
       {/* Main Navigation */}
-      <nav className="container mx-auto px-6 lg:px-12 flex justify-between items-center relative">
-        {/* Logo Area - unchanged */}
-        <div className="flex items-center gap-3 lg:gap-4 group cursor-pointer z-50">
+      <nav
+        ref={navRef}
+        className="container mx-auto px-6 lg:px-12 flex justify-between items-center relative"
+      >
+        {/* Logo Area - clickable */}
+        <Link
+          href="/"
+          className="flex items-center gap-3 lg:gap-4 group cursor-pointer z-50"
+        >
           <img
             id="logo-img"
             ref={logoImgRef}
@@ -262,7 +343,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
               INSTITUTE OF ENGINEERING & TECHNOLOGY
             </span>
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <div
@@ -278,8 +359,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
             <div
               ref={aboutDropdownRef}
-              className="dropdown-menu opacity-0 invisible transition-all duration-200 z-[9999]"
-              style={{ pointerEvents: "none" }}
+              className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-4 gap-6 px-2">
@@ -301,12 +381,12 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       >
                         About College
                       </a>
-                      <a
-                        href="#"
+                      <Link
+                        href="/about/vision-mission"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         Vision Mission
-                      </a>
+                      </Link>
 
                       <a
                         href="#"
@@ -397,14 +477,24 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                           Administration
                         </h3>
+                        <Link
+                          href="/about/administration"
+                          className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
+                        >
+                          Administration
+                        </Link>
+                      </div>
+                      <div>
+                        <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
+                          MOU&apos;s
+                        </h3>
                         <a
                           href="#"
                           className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                         >
-                          Administration
+                          MOU&apos;s
                         </a>
                       </div>
-                      <div></div>
                     </div>
                   </div>
 
@@ -468,14 +558,13 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           {/* ============ ADMISSIONS - FULL WIDTH MEGA MENU ============ */}
           <div ref={admissionsGroupRef} className="relative group py-4">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
-              Admissions
-              <i className="fas fa-chevron-down text-[8px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+              ADMISSIONS
+              <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
             </button>
 
             <div
               ref={admissionsDropdownRef}
-              className="dropdown-menu opacity-0 invisible transition-all duration-200 z-[9999]"
-              style={{ pointerEvents: "none" }}
+              className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
@@ -615,14 +704,13 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           {/* ============ ACADEMICS - FULL WIDTH MEGA MENU ============ */}
           <div ref={academicsGroupRef} className="relative group py-4">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
-              Academics
-              <i className="fas fa-chevron-down text-[8px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+              ACADEMICS
+              <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
             </button>
 
             <div
               ref={academicsDropdownRef}
-              className="dropdown-menu opacity-0 invisible transition-all duration-200 z-[9999]"
-              style={{ pointerEvents: "none" }}
+              className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
@@ -810,14 +898,13 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           {/* ============ RESEARCH - FULL WIDTH MEGA MENU ============ */}
           <div ref={researchGroupRef} className="relative group py-4">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
-              Research
-              <i className="fas fa-chevron-down text-[8px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+              RESEARCH
+              <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
             </button>
 
             <div
               ref={researchDropdownRef}
-              className="dropdown-menu opacity-0 invisible transition-all duration-200 z-[9999]"
-              style={{ pointerEvents: "none" }}
+              className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
@@ -933,14 +1020,13 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           {/* ============ PLACEMENTS - FULL WIDTH MEGA MENU ============ */}
           <div ref={placementsGroupRef} className="relative group py-4">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
-              Placements
-              <i className="fas fa-chevron-down text-[8px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+              PLACEMENTS
+              <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
             </button>
 
             <div
               ref={placementsDropdownRef}
-              className="dropdown-menu opacity-0 invisible transition-all duration-200 z-[9999]"
-              style={{ pointerEvents: "none" }}
+              className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
@@ -1022,14 +1108,13 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           <div ref={campusGroupRef} className="relative group py-4">
             <Link href="/campus-life">
               <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
-                Campus Life
-                <i className="fas fa-chevron-down text-[8px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+                CAMPUS LIFE
+                <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
               </button>
             </Link>
             <div
               ref={campusDropdownRef}
-              className="dropdown-menu opacity-0 invisible transition-all duration-200 z-[9999]"
-              style={{ pointerEvents: "none" }}
+              className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
@@ -1391,12 +1476,12 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           </div>
 
           {/* Contact Us - Simple link */}
-          <a
-            href="#"
+          <Link
+            href="/contact"
             className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-400 hover:after:w-full"
           >
             Contact Us
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Hamburger */}

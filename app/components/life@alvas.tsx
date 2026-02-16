@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
 
 const CAMPUS_DATA = [
   {
-    title: "EXPLORE",
+    title: "STARTUPS",
     subtitle: "Innovation Hub",
     desc: "",
     img: "https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=80",
@@ -26,7 +26,35 @@ const CAMPUS_DATA = [
     color: "#ffee00",
   },
   {
+    title: "EXPLORE",
+    subtitle: "Placements",
+    desc: "",
+    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
+    color: "#00ff88",
+  },
+  {
     title: "ACHIEVEMENTS",
+    subtitle: "Placements",
+    desc: "",
+    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
+    color: "#00ff88",
+  },
+  {
+    title: "ACTIVITIES",
+    subtitle: "Placements",
+    desc: "",
+    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
+    color: "#00ff88",
+  },
+  {
+    title: "CAMPUS",
+    subtitle: "Placements",
+    desc: "",
+    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
+    color: "#00ff88",
+  },
+  {
+    title: "SKILL LABS",
     subtitle: "Placements",
     desc: "",
     img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",

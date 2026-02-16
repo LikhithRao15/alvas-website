@@ -70,8 +70,14 @@
   border-radius: 12px !important;
   padding: 0 !important;
   z-index: 9999 !important;
-  margin-top: 0.75rem !important;
-  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(6px) !important;
+  transition:
+    opacity 0.18s ease,
+    visibility 0.18s ease,
+    transform 0.18s ease !important;
 }
 
 /* Inner container padding - consistent for all mega menus */
@@ -163,75 +169,8 @@
 /* ============================================ */
 
 /* Admissions - override any remaining compact styles */
-.group:nth-child(2) .dropdown-menu {
-  position: fixed !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: calc(100% - 4rem) !important;
-  max-width: 1200px !important;
-  min-width: 300px !important;
-  margin-top: 0.75rem !important;
-  padding: 0 !important;
-}
-
-.group:nth-child(2) .dropdown-menu > div {
-  padding: 2rem 2.5rem !important;
-}
-
-/* Admissions headers - exactly like other tabs */
-.group:nth-child(2) .dropdown-menu h3 {
-  font-size: 0.9rem !important;
-  font-weight: 700 !important;
-  color: #1e293b !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  border-bottom: 1px solid #e2e8f0 !important;
-  padding-bottom: 0.5rem !important;
-  margin-bottom: 1rem !important;
-  margin-top: 0 !important;
-}
-
-/* Admissions links - exactly like other tabs */
-.group:nth-child(2) .dropdown-menu a {
-  display: block !important;
-  font-size: 0.9rem !important;
-  font-weight: 450 !important;
-  color: #475569 !important;
-  padding: 0.25rem 0 !important;
-  margin: 0 !important;
-  transition: all 0.15s ease !important;
-  line-height: 1.5 !important;
-  text-decoration: none !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-}
-
-/* Admissions hover - exactly like other tabs */
-.group:nth-child(2) .dropdown-menu a:hover {
-  color: rgb(var(--nav-mustard)) !important;
-  padding-left: 0.25rem !important;
-  background: transparent !important;
-}
-
-/* Remove any remaining compact styles from Admissions */
-.group:nth-child(2) .dropdown-menu h4,
-.group:nth-child(2) .dropdown-menu .font-bold,
-.group:nth-child(2) .dropdown-menu .px-4,
-.group:nth-child(2) .dropdown-menu .py-2,
-.group:nth-child(2) .dropdown-menu .pl-6,
-.group:nth-child(2) .dropdown-menu .space-y-1,
-.group:nth-child(2) .dropdown-menu .mt-2 {
-  all: unset !important;
-}
-
-/* Restore proper spacing for Admissions columns */
-.group:nth-child(2) .dropdown-menu .space-y-4 {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0 !important;
-}
-
-.group:nth-child(2) .dropdown-menu .space-y-1 {
+/* Global space-y-1 for consistent link spacing */
+.dropdown-menu .space-y-1 {
   display: flex !important;
   flex-direction: column !important;
   gap: 0.25rem !important;
@@ -264,26 +203,16 @@
 /* CAMPUS LIFE - SPECIFIC ADJUSTMENTS */
 /* ============================================ */
 
-/* Clubs & Activities - scrollable */
-.group:nth-child(6) .max-h-96 {
-  max-height: 400px !important;
+/* Clubs & Activities - scrollable handled by global .max-h-96 */
+.dropdown-menu .max-h-96 {
   overflow-y: auto !important;
   padding-right: 0.75rem !important;
 }
 
-/* Club links */
-.group:nth-child(6) .max-h-96 a {
-  font-size: 0.85rem !important;
-  padding: 0.2rem 0 !important;
-  white-space: normal !important;
-  word-break: break-word !important;
-}
-
-/* Nested sections in Campus Life */
-.group:nth-child(6) .border-l-2 {
-  border-left: 2px solid #e2e8f0 !important;
+/* Nested sections default spacing */
+.dropdown-menu .border-l-2 {
   padding-left: 0.75rem !important;
-  margin-bottom: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 /* ============================================ */
@@ -315,18 +244,15 @@
 }
 
 /* ============================================ */
-/* HOVER STATES - SMOOTH */
+/* HOVER STATES - COORDINATED BY JS */
 /* ============================================ */
-.group:hover .dropdown-menu {
+/* Visibility is now handled exclusively by JS in Header.tsx to prevent multiple menus showing */
+/* .group:hover .dropdown-menu {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
-}
-
-/* All mega menus - centered transform on hover - INCLUDING ADMISSIONS NOW */
-.group:hover .dropdown-menu {
   transform: translateX(-50%) translateY(0) !important;
-}
+} */
 
 /* ============================================ */
 /* HEADER POSITIONING */
@@ -363,11 +289,11 @@
   .dropdown-menu {
     width: calc(100% - 2rem) !important;
   }
-  
+
   .dropdown-menu > div {
     padding: 1.5rem !important;
   }
-  
+
   .dropdown-menu .grid-cols-3 {
     gap: 1.5rem !important;
   }
@@ -378,11 +304,11 @@
   .dropdown-menu {
     width: calc(100% - 1rem) !important;
   }
-  
+
   .dropdown-menu > div {
     padding: 1.25rem !important;
   }
-  
+
   .dropdown-menu .grid-cols-3 {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
@@ -503,7 +429,7 @@
   .dropdown-menu {
     display: none !important;
   }
-  
+
   #main-header {
     position: relative !important;
   }
