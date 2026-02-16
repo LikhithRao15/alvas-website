@@ -258,27 +258,45 @@ export default function CampusHighlights() {
         </div>
 
         <style jsx>{`
-          /* Initial Stacked Positions (Card Deck) */
-          .card-node:nth-child(2) { transform: translate(-10px, -10px) rotate(-5deg); z-index: 5; }
-          .card-node:nth-child(3) { transform: translate(10px, -5px) rotate(3deg); z-index: 4; }
-          .card-node:nth-child(4) { transform: translate(-5px, 10px) rotate(-2deg); z-index: 3; }
-          .card-node:nth-child(5) { transform: translate(5px, 5px) rotate(4deg); z-index: 2; }
-          .card-node:nth-child(6) { transform: translate(0px, 0px) rotate(0deg); z-index: 1; }
-          .card-node:nth-child(7) { transform: translate(-8px, -8px) rotate(-3deg); z-index: 1; }
-          .card-node:nth-child(8) { transform: translate(8px, 8px) rotate(2deg); z-index: 1; }
+  /* Initial Stacked Positions */
+  .card-node:nth-child(2) { transform: translate(-10px, -10px) rotate(-5deg); z-index: 5; }
+  .card-node:nth-child(3) { transform: translate(10px, -5px) rotate(3deg); z-index: 4; }
+  .card-node:nth-child(4) { transform: translate(-5px, 10px) rotate(-2deg); z-index: 3; }
+  .card-node:nth-child(5) { transform: translate(5px, 5px) rotate(4deg); z-index: 2; }
+  .card-node:nth-child(6) { transform: translate(0px, 0px) rotate(0deg); z-index: 1; }
+  .card-node:nth-child(7) { transform: translate(-8px, -8px) rotate(-3deg); z-index: 1; }
+  .card-node:nth-child(8) { transform: translate(8px, 8px) rotate(2deg); z-index: 1; }
 
-          /* Expanded Grid Positions (Explosion) */
-          #grid-trigger.is-active .card-node:nth-child(2) { transform: translate(-140%, -110%) rotate(0deg) !important; } /* Top Left */
-          #grid-trigger.is-active .card-node:nth-child(3) { transform: translate(0%, -160%) rotate(0deg) !important; }   /* Top Center */
-          #grid-trigger.is-active .card-node:nth-child(4) { transform: translate(140%, -110%) rotate(0deg) !important; }  /* Top Right */
-          #grid-trigger.is-active .card-node:nth-child(5) { transform: translate(-180%, 20%) rotate(0deg) !important; }   /* Middle Left */
-          #grid-trigger.is-active .card-node:nth-child(6) { transform: translate(180%, 20%) rotate(0deg) !important; }    /* Middle Right */
-          #grid-trigger.is-active .card-node:nth-child(7) { transform: translate(-90%, 140%) rotate(0deg) !important; }   /* Bottom Left */
-          #grid-trigger.is-active .card-node:nth-child(8) { transform: translate(90%, 140%) rotate(0deg) !important; }    /* Bottom Right */
+  /* --- FIX FOR SMALLER SCREENS (SM/MD) --- */
+  @media (max-width: 1024px) {
+    #grid-trigger.is-active .card-node:nth-child(2) { transform: translate(-105%, -100%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(3) { transform: translate(0%, -130%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(4) { transform: translate(105%, -100%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(5) { transform: translate(-125%, 15%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(6) { transform: translate(125%, 15%) rotate(0deg) !important; }
+    /* The Fix: Reduced from 140% to 110% to prevent bottom clipping */
+    #grid-trigger.is-active .card-node:nth-child(7) { transform: translate(-60%, 110%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(8) { transform: translate(60%, 110%) rotate(0deg) !important; }
+  }
 
-          /* Hover Scale Fix */
-          .is-active .card-node:hover { z-index: 50; transform: scale(1.05) !important; transition: transform 0.3s ease !important; }
-        `}</style>
+  /* --- DESKTOP POSITIONS --- */
+  @media (min-width: 1025px) {
+    #grid-trigger.is-active .card-node:nth-child(2) { transform: translate(-140%, -110%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(3) { transform: translate(0%, -160%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(4) { transform: translate(140%, -110%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(5) { transform: translate(-180%, 20%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(6) { transform: translate(180%, 20%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(7) { transform: translate(-90%, 140%) rotate(0deg) !important; }
+    #grid-trigger.is-active .card-node:nth-child(8) { transform: translate(90%, 140%) rotate(0deg) !important; }
+  }
+
+  /* Hover Scale Fix */
+  .is-active .card-node:hover { 
+    z-index: 50; 
+    transform: scale(1.08) !important; 
+    transition: transform 0.3s ease !important; 
+  }
+`}</style>
       </section>
      
     </>

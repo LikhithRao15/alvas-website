@@ -908,7 +908,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
-                  {/* Column 1 - Research Areas */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Research Areas
@@ -947,7 +946,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </div>
                   </div>
 
-                  {/* Column 2 - Resources */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Resources
@@ -986,7 +984,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </div>
                   </div>
 
-                  {/* Column 3 - Facilities */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Facilities
@@ -1017,20 +1014,18 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             </div>
           </div>
 
-          {/* ============ PLACEMENTS - FULL WIDTH MEGA MENU ============ */}
           <div ref={placementsGroupRef} className="relative group py-4">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
               PLACEMENTS
-              <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+              <i className="text-[10px] ml-1 opacity-70 "></i>
             </button>
 
-            <div
+            {/* <div
               ref={placementsDropdownRef}
               className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
-                  {/* Column 1 - Overview */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Overview
@@ -1057,7 +1052,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </div>
                   </div>
 
-                  {/* Column 2 - Recruitment */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Recruitment
@@ -1084,7 +1078,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </div>
                   </div>
 
-                  {/* Column 3 - Statistics */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Statistics
@@ -1100,7 +1093,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* ============ CAMPUS LIFE - FULL WIDTH MEGA MENU ============ */}
@@ -1109,16 +1102,16 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             <Link href="/campus-life">
               <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
                 CAMPUS LIFE
-                <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+                <i className=" text-[10px] ml-1 opacity-70 "></i>
               </button>
             </Link>
-            <div
+            {/* git check */}
+            {/* <div
               ref={campusDropdownRef}
               className="dropdown-menu transition-all duration-200 z-[9999]"
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-3 gap-10">
-                  {/* Column 1 - Explore */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Explore
@@ -1204,7 +1197,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </div>
                   </div>
 
-                  {/* Column 2 - Clubs & Activities */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Clubs & Activities
@@ -1471,7 +1463,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Contact Us - Simple link */}
