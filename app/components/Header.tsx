@@ -375,12 +375,12 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       >
                         AEF
                       </a>
-                      <a
-                        href="#"
+                      <Link
+                        href="/about/college"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         About College
-                      </a>
+                      </Link>
                       <Link
                         href="/about/vision-mission"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
@@ -1345,7 +1345,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </div>
                   </div>
 
-                  {/* Column 3 - Facilities, Library, Achievements */}
                   <div>
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Facilities
