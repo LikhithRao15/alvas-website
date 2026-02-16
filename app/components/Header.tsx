@@ -1019,10 +1019,13 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
           {/* ============ PLACEMENTS - FULL WIDTH MEGA MENU ============ */}
           <div ref={placementsGroupRef} className="relative group py-4">
+            <Link href="/placement">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
+              
               PLACEMENTS
               <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
             </button>
+            </Link>
 
             <div
               ref={placementsDropdownRef}
