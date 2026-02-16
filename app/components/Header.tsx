@@ -1105,6 +1105,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 <i className=" text-[10px] ml-1 opacity-70 "></i>
               </button>
             </Link>
+            {/* git check */}
             {/* <div
               ref={campusDropdownRef}
               className="dropdown-menu transition-all duration-200 z-[9999]"
