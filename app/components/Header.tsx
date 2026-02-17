@@ -389,7 +389,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       </Link>
 
                       <Link
-                        href="/milestone"
+                        href="/about/milestone"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         Milestones
