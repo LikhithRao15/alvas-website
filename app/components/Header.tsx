@@ -375,12 +375,12 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       >
                         AEF
                       </a>
-                      <a
-                        href="#"
+                      <Link
+                        href="/about/college"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         About College
-                      </a>
+                      </Link>
                       <Link
                         href="/about/vision-mission"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
