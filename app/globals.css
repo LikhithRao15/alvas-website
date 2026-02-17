@@ -8,12 +8,9 @@
   --background-end-rgb: 248, 250, 252;
   --nav-cream: 255, 250, 240;
   --nav-mustard: 183, 119, 0;
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 /* ============================================ */
@@ -81,7 +78,7 @@
 }
 
 /* Inner container padding - consistent for all mega menus */
-.dropdown-menu > div {
+.dropdown-menu>div {
   padding: 2rem 2.5rem !important;
 }
 
@@ -290,7 +287,7 @@
     width: calc(100% - 2rem) !important;
   }
 
-  .dropdown-menu > div {
+  .dropdown-menu>div {
     padding: 1.5rem !important;
   }
 
@@ -305,7 +302,7 @@
     width: calc(100% - 1rem) !important;
   }
 
-  .dropdown-menu > div {
+  .dropdown-menu>div {
     padding: 1.25rem !important;
   }
 
@@ -434,9 +431,28 @@
     position: relative !important;
   }
 }
+
 @layer utilities {
   .preserve-3d {
     transform-style: preserve-3d;
     backface-visibility: hidden;
+  }
+}
+
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
   }
 }
