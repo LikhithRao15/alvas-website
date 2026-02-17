@@ -388,13 +388,14 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         Vision Mission
                       </Link>
 
-                      <a
-                        href="#"
+                      <Link
+                        href="/milestone"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         Milestones
-                      </a>
+                      </Link>
                     </div>
+
                     <div className="grid grid-cols-1 gap-6 mt-6">
                       <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4 mt-6">
                         Accreditations

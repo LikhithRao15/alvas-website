@@ -434,3 +434,9 @@
     position: relative !important;
   }
 }
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+}
