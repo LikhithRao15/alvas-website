@@ -1,70 +1,79 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import Header from "./Header";
+import MobileMenu from "./MobileMenu";
 
+// Added 'href' to every single object in the data array
 const CAMPUS_DATA = [
   {
     title: "STARTUPS",
     subtitle: "Innovation Hub",
-    desc: "",
+    desc: "Empowering student entrepreneurs to build the future.",
     img: "https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=80",
     color: "#00f2ff",
+    href: "/campus-life/startups",
   },
   {
     title: "CLUBS & ACTIVITIES",
     subtitle: "Future Tech",
-    desc: "",
+    desc: "Discover your passion in our technical and cultural clubs.",
     img: "https://images.unsplash.com/photo-1581093458791-9f302e6d8659?w=1600&q=80",
     color: "#ff0055",
+    href: "/campus-life/clubs",
   },
   {
     title: "LIBRARY",
-    subtitle: "Sports & Vitality",
-    desc: "",
+    subtitle: "Knowledge Oasis",
+    desc: "Access thousands of journals and digital resources.",
     img: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600&q=80",
     color: "#ffee00",
+    href: "/campus-life/library",
   },
   {
     title: "EXPLORE",
-    subtitle: "Placements",
-    desc: "",
+    subtitle: "Campus Tour",
+    desc: "Virtually experience our world-class infrastructure.",
     img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
     color: "#00ff88",
+    href: "/campus-life/explore",
   },
   {
     title: "ACHIEVEMENTS",
-    subtitle: "Placements",
-    desc: "",
-    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
-    color: "#00ff88",
+    subtitle: "Excellence",
+    desc: "Showcasing the milestones of our bright students.",
+    img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&q=80",
+    color: "#ff9d00",
+    href: "/campus-life/achievements",
   },
   {
     title: "ACTIVITIES",
-    subtitle: "Placements",
-    desc: "",
-    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
-    color: "#00ff88",
+    subtitle: "Student Culture",
+    desc: "Life beyond academics with fests and events.",
+    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&q=80",
+    color: "#bf00ff",
+    href: "/campus-life/activities",
   },
   {
     title: "CAMPUS",
-    subtitle: "Placements",
-    desc: "",
-    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
-    color: "#00ff88",
+    subtitle: "Living Spaces",
+    desc: "Comfortable hostels and green spaces.",
+    img: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?w=1600&q=80",
+    color: "#ffffff",
+    href: "/campus-life/campus",
   },
   {
     title: "SKILL LABS",
     subtitle: "Placements",
-    desc: "",
-    img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1600&q=80",
-    color: "#00ff88",
+    desc: "Advanced laboratories for industrial skill development.",
+    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80",
+    color: "#0077ff",
+    href: "/campus-life/skill-labs",
   },
 ];
-
-import { useRouter } from "next/navigation";
-import Header from "./Header";
-import MobileMenu from "./MobileMenu";
 
 export default function LifeAtAIET() {
   const router = useRouter();
@@ -81,30 +90,25 @@ export default function LifeAtAIET() {
   };
 
   const next = () => setActive((prev) => (prev + 1) % CAMPUS_DATA.length);
-  const prev = () =>
-    setActive((prev) => (prev - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length);
+  const prev = () => setActive((prev) => (prev - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length);
 
+  // Redirection Logic
   const handleExplore = (item: (typeof CAMPUS_DATA)[0]) => {
-    if (item.title === "CLUBS & ACTIVITIES") {
-      router.push("/campus-life/clubs");
-    } else {
-      console.log("No specific page for:", item.title);
+    if (item.href) {
+      router.push(item.href);
     }
   };
 
   return (
     <div className="experience-root" onMouseMove={onMouseMove}>
       <Head>
-        <title>Life @ AIET | Glass Immersive</title>
+        <title>Life @ AIET | Immersive Experience</title>
       </Head>
 
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
       <Header onMenuToggle={toggleMobileMenu} />
 
-      {/* --- DYNAMIC BACKGROUND: Mirrors the Card Image --- */}
+      {/* --- BACKGROUND LAYER --- */}
       <div className="immersive-bg">
         {CAMPUS_DATA.map((item, i) => (
           <div
@@ -112,22 +116,18 @@ export default function LifeAtAIET() {
             className={`bg-frame ${i === active ? "active" : ""}`}
             style={{
               backgroundImage: `url(${item.img})`,
-              transform: `scale(1.15) translate(${coords.x}px, ${coords.y}px)`,
+              transform: `scale(1.1) translate(${coords.x}px, ${coords.y}px)`,
             }}
           />
         ))}
-        {/* Dark vignette to keep text readable */}
         <div className="vignette" />
       </div>
 
       <div className="content-layer">
-        {/* Header Removed - replaced by global component */}
-
         <div className="slider-viewport">
           {CAMPUS_DATA.map((item, i) => {
             const isCenter = i === active;
-            const isLeft =
-              i === (active - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length;
+            const isLeft = i === (active - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length;
             const isRight = i === (active + 1) % CAMPUS_DATA.length;
 
             let pos = "hidden";
@@ -148,7 +148,6 @@ export default function LifeAtAIET() {
                 }
               >
                 <div className="glass-card">
-                  {/* Internal Image */}
                   <div className="card-image-box">
                     <img src={item.img} alt={item.title} />
                     <div className="image-overlay" />
@@ -157,23 +156,15 @@ export default function LifeAtAIET() {
                   <div className="card-body">
                     <div className="badge-row">
                       <span className="glass-tag">CAMPUS</span>
-                      <span
-                        className="status-dot"
-                        style={{ backgroundColor: item.color }}
-                      />
+                      <span className="status-dot" style={{ backgroundColor: item.color }} />
                       <span className="subtitle">{item.subtitle}</span>
                     </div>
                     <h2 className="card-title">{item.title}</h2>
                     <p className="card-desc">{item.desc}</p>
-                    <button
-                      className="action-btn"
-                      onClick={() => handleExplore(item)}
-                    >
+                    <button className="action-btn" onClick={() => handleExplore(item)}>
                       <FaPlay size={10} /> EXPLORE EXPERIENCE
                     </button>
                   </div>
-
-                  {/* High-end Reflection layer */}
                   <div className="reflection" />
                 </div>
               </div>
@@ -181,15 +172,17 @@ export default function LifeAtAIET() {
           })}
         </div>
 
+        {/* --- NAVIGATION CONTROLS --- */}
         <nav className="nav-container">
           <button className="nav-btn" onClick={prev}>
             <FaChevronLeft />
           </button>
           <div className="dot-track">
-            {CAMPUS_DATA.map((_, i) => (
+            {CAMPUS_DATA.map((item, i) => (
               <div
                 key={i}
                 className={`dot ${i === active ? "active" : ""}`}
+                style={{ "--dot-color": item.color } as any}
                 onClick={() => setActive(i)}
               />
             ))}
@@ -210,12 +203,10 @@ export default function LifeAtAIET() {
           font-family: "Inter", sans-serif;
         }
 
-        /* --- Immersive Background --- */
         .immersive-bg {
           position: absolute;
           inset: 0;
           z-index: 1;
-          overflow: hidden;
         }
 
         .bg-frame {
@@ -223,82 +214,45 @@ export default function LifeAtAIET() {
           inset: -50px;
           background-size: cover;
           background-position: center;
-          filter: blur(10px) brightness(0.5) saturate(1.2);
+          filter: blur(20px) brightness(0.4) saturate(1.2);
           opacity: 0;
-          transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: opacity 1.2s ease-in-out;
         }
 
         .bg-frame.active {
-          opacity: 2;
+          opacity: 1;
         }
 
         .vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(
-            circle at center,
-            transparent 20%,
-            rgba(0, 0, 0, 0.7) 100%
-          );
+          background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
           z-index: 2;
         }
 
-        /* --- Layout --- */
         .content-layer {
           position: relative;
           z-index: 10;
           height: 100%;
           display: flex;
           flex-direction: column;
-          padding: 40px 80px;
+          padding: 40px;
         }
 
-        .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-
-        .logo {
-          color: white;
-          font-weight: 900;
-          font-size: 1.4rem;
-          letter-spacing: 2px;
-        }
-
-        .logo span {
-          opacity: 0.4;
-          font-weight: 300;
-        }
-
-        .discover-more {
-          color: white;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 8px 20px;
-          border-radius: 30px;
-          font-size: 0.7rem;
-          font-weight: 600;
-          cursor: pointer;
-          backdrop-filter: blur(10px);
-        }
-
-        /* --- Card Styles --- */
         .slider-viewport {
           flex: 1;
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          perspective: 1500px;
+          perspective: 2000px;
         }
 
         .card-anchor {
           position: absolute;
-          width: 420px;
-          height: 560px;
-          transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+          width: 400px;
+          height: 540px;
+          transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
           transform-style: preserve-3d;
         }
 
@@ -306,17 +260,17 @@ export default function LifeAtAIET() {
           width: 100%;
           height: 100%;
           background: rgba(255, 255, 255, 0.03);
-          backdrop-filter: blur(15px);
-          border-radius: 40px;
+          backdrop-filter: blur(20px);
+          border-radius: 30px;
           border: 1px solid rgba(255, 255, 255, 0.1);
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
         }
 
         .card-image-box {
-          height: 55%;
+          height: 50%;
           position: relative;
           overflow: hidden;
         }
@@ -325,21 +279,16 @@ export default function LifeAtAIET() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 1.5s ease;
         }
 
         .image-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(0, 0, 0, 0.8)
-          );
+          background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
         }
 
         .card-body {
-          padding: 35px;
+          padding: 30px;
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -349,8 +298,8 @@ export default function LifeAtAIET() {
         .badge-row {
           display: flex;
           align-items: center;
-          gap: 12px;
-          margin-bottom: 15px;
+          gap: 10px;
+          margin-bottom: 10px;
         }
 
         .glass-tag {
@@ -359,8 +308,7 @@ export default function LifeAtAIET() {
           color: white;
           background: rgba(255, 255, 255, 0.1);
           padding: 4px 10px;
-          border-radius: 5px;
-          letter-spacing: 1px;
+          border-radius: 4px;
         }
 
         .status-dot {
@@ -371,101 +319,87 @@ export default function LifeAtAIET() {
 
         .subtitle {
           font-size: 0.7rem;
-          font-weight: 600;
-          color: rgba(255, 255, 255, 0.6);
+          color: rgba(255, 255, 255, 0.5);
           text-transform: uppercase;
         }
 
         .card-title {
-          font-size: 2.8rem;
-          font-weight: 800;
+          font-size: 2.2rem;
+          font-weight: 900;
           color: white;
-          margin: 0 0 12px 0;
-          line-height: 1;
+          margin: 0 0 10px 0;
         }
 
         .card-desc {
-          font-size: 0.95rem;
-          color: rgba(255, 255, 255, 0.5);
-          line-height: 1.5;
-          margin-bottom: 25px;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.4);
+          margin-bottom: 20px;
         }
 
         .action-btn {
           background: white;
           color: black;
           border: none;
-          padding: 14px 28px;
-          border-radius: 12px;
+          padding: 12px 24px;
+          border-radius: 10px;
           font-weight: 800;
-          font-size: 0.75rem;
+          font-size: 0.7rem;
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 10px;
           cursor: pointer;
           width: max-content;
+          transition: transform 0.2s;
         }
 
-        .reflection {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 100%;
-          background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            transparent 40%
-          );
-          pointer-events: none;
+        .action-btn:hover {
+          transform: scale(1.05);
         }
 
-        /* --- States --- */
+        /* Perspective Positioning */
         .card-anchor.center {
-          transform: translate3d(0, 0, 100px) rotateX(var(--tilt-x))
-            rotateY(var(--tilt-y));
+          transform: translate3d(0, 0, 150px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
           z-index: 10;
-        }
-
-        .card-anchor.center .card-image-box img {
-          transform: scale(1.1);
+          opacity: 1;
         }
 
         .card-anchor.left {
-          transform: translate3d(-450px, 0, -250px) rotateY(30deg);
+          transform: translate3d(-400px, 0, -200px) rotateY(35deg);
           opacity: 0.3;
+          pointer-events: none;
         }
 
         .card-anchor.right {
-          transform: translate3d(450px, 0, -250px) rotateY(-30deg);
+          transform: translate3d(400px, 0, -200px) rotateY(-35deg);
           opacity: 0.3;
+          pointer-events: none;
         }
 
         .card-anchor.hidden {
-          transform: translate3d(0, 100px, -600px);
+          transform: translate3d(0, 50px, -500px);
           opacity: 0;
+          pointer-events: none;
         }
 
-        /* --- Nav --- */
         .nav-container {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 40px;
-          padding-bottom: 20px;
+          gap: 30px;
+          margin-top: 20px;
         }
 
         .nav-btn {
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
           color: white;
-          width: 50px;
-          height: 50px;
+          width: 45px;
+          height: 45px;
           border-radius: 50%;
+          cursor: pointer;
           display: grid;
           place-items: center;
-          cursor: pointer;
-          transition: all 0.3s;
+          transition: 0.3s;
         }
 
         .nav-btn:hover {
@@ -475,7 +409,7 @@ export default function LifeAtAIET() {
 
         .dot-track {
           display: flex;
-          gap: 12px;
+          gap: 10px;
         }
 
         .dot {
@@ -488,25 +422,19 @@ export default function LifeAtAIET() {
         }
 
         .dot.active {
-          background: var(--accent);
-          transform: scale(1.4);
-          box-shadow: 0 0 15px var(--accent);
+          background: var(--dot-color);
+          transform: scale(1.5);
+          box-shadow: 0 0 10px var(--dot-color);
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
           .card-anchor {
-            width: 320px;
-            height: 480px;
+            width: 280px;
+            height: 420px;
           }
-          .card-anchor.left {
-            transform: translate3d(-180px, 0, -300px) rotateY(35deg) scale(0.8);
-          }
-          .card-anchor.right {
-            transform: translate3d(180px, 0, -300px) rotateY(-35deg) scale(0.8);
-          }
-          .card-title {
-            font-size: 2rem;
-          }
+          .card-anchor.left { transform: translate3d(-150px, 0, -300px) rotateY(40deg); }
+          .card-anchor.right { transform: translate3d(150px, 0, -300px) rotateY(-40deg); }
+          .card-title { font-size: 1.6rem; }
         }
       `}</style>
     </div>

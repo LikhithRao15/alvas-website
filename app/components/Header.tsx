@@ -1019,88 +1019,14 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
           {/* ============ PLACEMENTS - FULL WIDTH MEGA MENU ============ */}
           <div ref={placementsGroupRef} className="relative group py-4">
+           <Link href="/placement">
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
               PLACEMENTS
-              <i className="fas fa-chevron-down text-[10px] ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+              <i className=" text-[10px] ml-1 opacity-70"></i>
             </button>
+            </Link>
 
-            <div
-              ref={placementsDropdownRef}
-              className="dropdown-menu transition-all duration-200 z-[9999]"
-            >
-              <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
-                <div className="grid grid-cols-3 gap-10">
-                  {/* Column 1 - Overview */}
-                  <div>
-                    <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                      Overview
-                    </h3>
-                    <div className="space-y-1">
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        About
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Team
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Placed Students
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Column 2 - Recruitment */}
-                  <div>
-                    <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                      Recruitment
-                    </h3>
-                    <div className="space-y-1">
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Companies Visited
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Recruiters
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Placement Posters
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Column 3 - Statistics */}
-                  <div>
-                    <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                      Statistics
-                    </h3>
-                    <div className="space-y-1">
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        List of Students Placed Last 5 Years
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
 
           {/* ============ CAMPUS LIFE - FULL WIDTH MEGA MENU ============ */}
@@ -1352,7 +1278,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </h3>
                     <div className="space-y-1 mb-6">
                       <a
-                        href="#"
+                        href="../campus-life/library"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         Library
