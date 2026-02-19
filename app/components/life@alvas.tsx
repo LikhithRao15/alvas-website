@@ -94,8 +94,22 @@ export default function LifeAtAIET() {
 
   // Redirection Logic
   const handleExplore = (item: (typeof CAMPUS_DATA)[0]) => {
+<<<<<<< HEAD
     if (item.href) {
       router.push(item.href);
+=======
+    if (item.title === "CLUBS & ACTIVITIES") {
+      router.push("/campus-life/clubs");
+<<<<<<< HEAD
+    } else if (item.title === "ACHIEVEMENTS") {
+      router.push("/campus-life/achievements");
+=======
+    } else if (item.title === "EXPLORE") {
+      router.push("/campus-life/Explore");
+>>>>>>> a3cc359ce74292b7ee72c704b7bd04d67701b27f
+    } else {
+      console.log("No specific page for:", item.title);
+>>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
     }
   };
 

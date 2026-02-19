@@ -1,28 +1,34 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import gsap from 'gsap'
-import Script from 'next/script'
+import { useEffect } from "react";
+import gsap from "gsap";
+import Script from "next/script";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaWhatsapp,
+  FaBloggerB,
+} from "react-icons/fa6";
+import { FaTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   useEffect(() => {
     // Set current year
-    const yearElement = document.getElementById('year')
+    const yearElement = document.getElementById("year");
     if (yearElement) {
-      yearElement.textContent = new Date().getFullYear().toString()
+      yearElement.textContent = new Date().getFullYear().toString();
     }
-
-  }, [])
+  }, []);
 
   return (
     <>
       <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" />
-      
-      <footer className="bg-[#071a34] text-white pt-16 pb-6 mt-16">
+
+      <footer className="bg-[#071a34] text-white pt-10 pb-6 mt-10">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           {/* TOP GRID - Mobile First: 2 cols | Tablet: 2 cols | Desktop: 5 cols */}
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-12">
-            
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-8">
             {/* 1. LOGO + CONTACT - Full width on mobile/tablet */}
             <div className="col-span-2 lg:col-span-2">
               <div className="flex items-center gap-4 mb-6">
@@ -47,16 +53,28 @@ export default function Footer() {
               {/* CONTACT INFO */}
               <div className="space-y-5 text-sm text-white/70 font-medium">
                 <div className="flex gap-3">
-                  <p className="font-extrabold text-white w-20 shrink-0">Phone</p>
-                  <p>+91 98765 43210 <br /> +91 98765 43211</p>
+                  <p className="font-extrabold text-white w-20 shrink-0">
+                    Phone
+                  </p>
+                  <p>
+                    +91 98765 43210 <br /> +91 98765 43211
+                  </p>
                 </div>
                 <div className="flex gap-3">
-                  <p className="font-extrabold text-white w-20 shrink-0">Email</p>
-                  <p>info@alvas.edu.in <br /> principal@alvas.edu.in</p>
+                  <p className="font-extrabold text-white w-20 shrink-0">
+                    Email
+                  </p>
+                  <p>
+                    info@alvas.edu.in <br /> principal@alvas.edu.in
+                  </p>
                 </div>
                 <div className="flex gap-3">
-                  <p className="font-extrabold text-white w-20 shrink-0">Address</p>
-                  <p>Alva's Campus, Moodbidri <br /> Karnataka, India - 574227</p>
+                  <p className="font-extrabold text-white w-20 shrink-0">
+                    Address
+                  </p>
+                  <p>
+                    Alva's Campus, Moodbidri <br /> Karnataka, India - 574227
+                  </p>
                 </div>
               </div>
             </div>
@@ -67,13 +85,41 @@ export default function Footer() {
                 Facilities
               </h4>
               <ul className="space-y-3 text-sm text-white/70 font-semibold">
-                <li><a href="#" className="hover:text-yellow-300 transition">Placements</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Campus</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Library</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Hostel</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Transportation</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">CSR</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Core Facilities</a></li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Placements
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Campus
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Library
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Hostel
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Transportation
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    CSR
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Core Facilities
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -83,13 +129,41 @@ export default function Footer() {
                 Academics
               </h4>
               <ul className="space-y-3 text-sm text-white/70 font-semibold">
-                <li><a href="#" className="hover:text-yellow-300 transition">Academics</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Courses Offered</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Academic Calendar</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Research</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Value Added Courses</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Results</a></li>
-                <li><a href="#" className="hover:text-yellow-300 transition">Useful Links</a></li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Academics
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Courses Offered
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Academic Calendar
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Research
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Value Added Courses
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Results
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-yellow-300 transition">
+                    Useful Links
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -110,21 +184,79 @@ export default function Footer() {
                   title="Alvas Institute Location"
                 ></iframe>
               </a>
+
+              {/* FOLLOW US */}
+              <div className="mt-6">
+                <h4 className="text-[11px] font-black tracking-widest uppercase mb-3 text-white/90">
+                  Follow Us
+                </h4>
+                <div className="flex flex-row flex-nowrap gap-2">
+                  <a
+                    href="https://alvasengineering.blogspot.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group shadow-lg"
+                  >
+                    <FaBloggerB className="text-white text-sm group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/aietmoodbidri/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group shadow-lg"
+                  >
+                    <FaFacebookF className="text-white text-sm group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://twitter.com/aietmoodbidri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group shadow-lg"
+                  >
+                    <FaTwitter className="text-white text-sm group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@AlvasInstitute"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group shadow-lg"
+                  >
+                    <FaYoutube className="text-white text-sm group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/aietmoodbidri/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group shadow-lg"
+                  >
+                    <FaInstagram className="text-white text-sm group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group shadow-lg"
+                  >
+                    <FaWhatsapp className="text-white text-sm group-hover:scale-110 transition-transform" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* BOTTOM LINE */}
-          <div className="mt-12 pt-6 border-t border-white/10 text-center">
+          <div className="mt-8 pt-6 border-t border-white/10 text-center">
             <p className="text-xs text-white/50 font-semibold tracking-wide">
               © <span id="year"></span> Alvas Institute of Engineering and
               Technology. All Rights Reserved.
             </p>
             <p className="text-xs text-white/40 font-semibold mt-2">
-              Managed by <span className="text-yellow-300">Alva's Web Team</span>
+              Managed by{" "}
+              <span className="text-yellow-300">LogicHue</span>
             </p>
           </div>
         </div>
       </footer>
     </>
-  )
+  );
 }
