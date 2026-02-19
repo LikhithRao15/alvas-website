@@ -105,87 +105,13 @@ export default function ContactUs() {
               Contact Alva’s Institute of Engineering and Technology
             </h2>
             <div className="space-y-6 text-slate-600 leading-relaxed text-lg font-medium">
-              <p>
-                At Alva’s Institute of Engineering and Technology, we believe in
-                building strong connections with students, parents, alumni, and
-                well-wishers. Whether you are seeking admission details,
-                information about our courses, or looking to collaborate with
-                us, our team is always ready to guide you. The Contact Alva’s
-                Institute of Engineering and Technology page is designed to make
-                communication simple, clear, and efficient.
-              </p>
-              <p>
-                Education is not just about academic excellence—it is also about
-                relationships, trust, and accessibility. That is why we place
-                equal importance on providing easy communication channels for
-                everyone who wishes to reach us. Every query, whether big or
-                small, matters to us, because we understand that behind every
-                message is a student’s dream, a parent’s concern, or an industry
-                partner’s aspiration. By reaching out, you become a part of our
-                growing community.
-              </p>
-              <p>
-                Located in the serene surroundings of Mijar, Moodbidri, our
-                campus welcomes students and visitors from across India and
-                beyond. However, distance should never be a barrier. With
-                multiple contact options, including phone, email, and social
-                media, we ensure that no matter where you are, Alva’s Institute
-                of Engineering and Technology is just a message away.
-              </p>
-              <p>
-                This page provides complete details about our official address,
-                enquiry numbers, and email IDs. You will also find directions to
-                our campus, making it convenient for first-time visitors. In
-                addition, we encourage you to follow our official website and
-                social media platforms where updates on admissions, academic
-                events, placements, and cultural activities are regularly
-                shared.
-              </p>
-              <p>
-                For us, connecting with people is more than just answering
-                questions—it is about guiding students toward success,
-                reassuring parents about their child’s future, and creating
-                valuable partnerships that shape tomorrow. We invite you to
-                contact us with confidence, knowing that your queries will be
-                addressed with respect, care, and commitment.
-              </p>
+              
             </div>
           </div>
         </div>
 
         {/* Why Reach Out Section */}
-        <div className="mt-20 p-10 bg-amber-50/50 rounded-3xl border border-amber-200">
-          <h3 className="text-2xl font-serif font-bold text-slate-800 mb-8">
-            Why Reach Out to Alva’s Institute of Engineering and Technology?
-          </h3>
-          <p className="text-slate-600 mb-8 text-lg">
-            Education is more than classrooms and books; it is about creating
-            meaningful interactions. Our doors are open to students, parents,
-            recruiters, industry partners, and visitors who wish to learn more
-            about our institution. By contacting us, you will:
-          </p>
-          <ul className="grid md:grid-cols-2 gap-6">
-            {[
-              "Get complete details about our engineering programs, facilities, and campus life.",
-              "Receive guidance on the admission process, eligibility, and scholarships.",
-              "Connect with the right departments for academic or administrative queries.",
-              "Learn more about our placements, research opportunities, and collaborations.",
-            ].map((item, idx) => (
-              <li key={idx} className="flex gap-4 items-start">
-                <div className="w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center shrink-0 mt-1">
-                  <i className="fas fa-check text-white text-[10px]" />
-                </div>
-                <span className="text-slate-700 font-semibold">{item}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-10 text-amber-700 font-bold">
-            For a better understanding of our academic offerings, explore our{" "}
-            <a href="#" className="underline">
-              Departments at Alva’s Institute of Engineering and Technology
-            </a>
-          </p>
-        </div>
+       
 
         {/* Contact Information Cards */}
         <div className="mt-24">
@@ -218,9 +144,9 @@ export default function ContactUs() {
                 <i className="fas fa-fax text-amber-600 text-xl" />
               </div>
               <h4 className="text-lg font-black text-slate-800 mb-4 uppercase tracking-tighter">
-                Fax
+                Address
               </h4>
-              <p className="text-slate-600 text-sm font-bold">08258 – 262726</p>
+              <p className="text-slate-600 text-sm font-bold">Solapur - Mangalore Highway, Shobhavana Campus MIJAR, Moodbidri, Mangaluru, Karnataka 574225</p>
             </div>
 
             <div className="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-amber-400 transition-all duration-300">

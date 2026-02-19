@@ -51,7 +51,7 @@ export default function Administration() {
       name: "Dr. M. Mohan Alva",
       role: "Chairman, Alva's Education Foundation",
       image:
-        "https://alvascentralschool001.42web.io/wp-content/uploads/2026/02/chairman.jpg", // Using placeholder logic or actual if available
+        "/Dr.Mohan-Alva-1.jpg", // Using placeholder logic or actual if available
       message:
         "Our vision is to mold students into innovative leaders with strong cultural and ethical values. Alva's Institute of Engineering & Technology remains committed to academic excellence and social responsibility, ensuring every graduate is prepared to serve the global community.",
     },
@@ -60,7 +60,7 @@ export default function Administration() {
         name: "Mr. Vivek Alva",
         role: "Trustee, AEF",
         image:
-          "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400&h=500",
+          "/vivek.jpg",
         message:
           "Empowering young minds with modern technology while staying rooted in our traditions is the hallmark of Alva's education.",
       },
@@ -68,7 +68,7 @@ export default function Administration() {
         name: "Mr. Vinay Alva",
         role: "Trustee, AEF",
         image:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400&h=500",
+          "/vinay sir.webp",
         message:
           "Consistency in quality and dedication to student success drives our administrative decisions at every level.",
       },
@@ -86,7 +86,7 @@ export default function Administration() {
         name: "Dr. Peter Fernandes",
         role: "Principal, AIET",
         image:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400&h=500",
+          "/peter sir.webp",
         message:
           "Fostering academic rigor and research excellence to place AIET among the top technical institutions globally.",
       },

@@ -135,33 +135,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
       return !!el && !!target && el.contains(target);
     }
 
-    window.addEventListener(
-      "mousemove",
-      (e) => {
-        if (!activeMenu) return;
-
-        const target = e.target as Node;
-
-        // If mouse is inside ACTIVE TAB GROUP OR inside active dropdown → do nothing
-        if (isInside(activeGroup, target) || isInside(activeMenu, target)) {
-          if (closeTimer) {
-            clearTimeout(closeTimer);
-            closeTimer = null;
-          }
-          return;
-        }
-
-        // Delay closure slightly to bridge accidental gaps (e.g. while moving from tab to card)
-        if (!closeTimer && activeMenu) {
-          closeTimer = setTimeout(() => {
-            if (activeMenu) closeMenu(activeMenu);
-            closeTimer = null;
-          }, 100); // 100ms bridge remains snappy but prevents flicker
-        }
-      },
-      { passive: true, signal },
-    );
-
     function openMenu(group: HTMLElement, dd: HTMLElement) {
       if (closeTimer) {
         clearTimeout(closeTimer);
@@ -220,21 +193,40 @@ export default function Header({ onMenuToggle }: HeaderProps) {
       }
     }
 
-    // Attach event listeners to all mega menus
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+        if (!activeMenu) return;
 
+        const target = e.target as Node;
+
+        // If mouse is inside ACTIVE TAB GROUP OR inside active dropdown → do nothing
+        if (isInside(activeGroup, target) || isInside(activeMenu, target)) {
+          if (closeTimer) {
+            clearTimeout(closeTimer);
+            closeTimer = null;
+          }
+          return;
+        }
+
+        // Delay closure slightly to bridge accidental gaps (e.g. while moving from tab to card)
+        if (!closeTimer && activeMenu) {
+          closeTimer = setTimeout(() => {
+            if (activeMenu) closeMenu(activeMenu);
+            closeTimer = null;
+          }, 100); // 100ms bridge remains snappy but prevents flicker
+        }
+      },
+      { passive: true, signal },
+    );
+
+    // Attach event listeners to all mega menus
     megaMenus.forEach(({ group, dd }) => {
       if (!group || !dd) return;
 
       const handleEnter = () => openMenu(group, dd);
 
-      const handleLeave = (e: Event) => {
-        const related = (e as MouseEvent).relatedTarget as Node;
-        if (group.contains(related) || dd.contains(related)) return;
-        closeMenu(dd);
-      };
-
       group.addEventListener("mouseenter", handleEnter, { signal });
-
       dd.addEventListener("mouseenter", handleEnter, { signal });
     });
 
@@ -363,151 +355,155 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             >
               <div className="bg-white border border-[#edf2f7] border-t-[3px] border-t-[#b77a00] rounded-xl shadow-lg p-8">
                 <div className="grid grid-cols-4 gap-6 px-2">
-                  {/* Column 1 - Institution */}
-                  <div>
-                    <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                      Institution
-                    </h3>
-                    <div className="space-y-1">
-                      <a
+                  {/* Column 1 - Categories List */}
+                  <div className="col-span-1 border-r border-[#e2e8f0] pr-6">
+                    <div className="flex flex-col space-y-2">
+                      {/* Institution */}
+                      <div className="has-submenu group/sub">
+                        <div className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
+                          <span>INSTITUTION</span>
+                          <i className="fas fa-chevron-right text-[10px] opacity-50 group-hover/sub:translate-x-1 transition-transform"></i>
+                        </div>
+                        <div className="submenu">
+                          <Link
+                            href="/about/college"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            About College
+                          </Link>
+                          <Link
+                            href="/about/vision-mission"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            Vision Mission
+                          </Link>
+                          <Link
+                            href="/about/milestone"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            Milestones
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Accreditations */}
+                      <div className="has-submenu group/sub">
+                        <div className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
+                          <span>ACCREDITATIONS</span>
+                          <i className="fas fa-chevron-right text-[10px] opacity-50 group-hover/sub:translate-x-1 transition-transform"></i>
+                        </div>
+                        <div className="submenu">
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            AICTE
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            NBA
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            NAAC
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            Autonomous
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Mandatory Disclosure */}
+                      <div className="has-submenu group/sub">
+                        <div className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
+                          <span>MANDATORY DISCLOSURE</span>
+                          <i className="fas fa-chevron-right text-[10px] opacity-50 group-hover/sub:translate-x-1 transition-transform"></i>
+                        </div>
+                        <div className="submenu">
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            College Info
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            AICTE
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            NBA
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            NAAC
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            Autonomous
+                          </a>
+                          <a
+                            href="#"
+                            className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] py-2"
+                          >
+                            Audit Reports
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* MOU */}
+                      <Link
                         href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
+                        className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
-                        AEF
-                      </a>
-                      <Link
-                        href="/about/college"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        About College
-                      </Link>
-                      <Link
-                        href="/about/vision-mission"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Vision Mission
+                        <span>MOU</span>
                       </Link>
 
+                      {/* AEF */}
                       <Link
-                        href="/about/milestone"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
+                        href="#"
+                        className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
-                        Milestones
+                        <span>AEF</span>
                       </Link>
-                    </div>
 
-                    <div className="grid grid-cols-1 gap-6 mt-6">
-                      <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4 mt-6">
-                        Accreditations
-                      </h3>
-                    </div>
-                    <div className="space-y-1">
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
+                      {/* Administration */}
+                      <Link
+                        href="/about/administration"
+                        className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
-                        AICTE
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        NBA
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        NAAC
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Autonomous
-                      </a>
+                        <span>ADMINISTRATION</span>
+                      </Link>
                     </div>
                   </div>
 
-                  {/* Column 2 - Disclosure & Contact */}
-                  <div>
-                    <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                      Mandatory Disclosure
-                    </h3>
-                    <div className="space-y-1">
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        College Info
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        AICTE
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        NBA
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        NAAC
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Autonomous
-                      </a>
-                      <a
-                        href="#"
-                        className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                      >
-                        Audit Reports
-                      </a>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-6 mt-6">
-                      <div>
-                        <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                          Administration
-                        </h3>
-                        <Link
-                          href="/about/administration"
-                          className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                        >
-                          Administration
-                        </Link>
-                      </div>
-                      <div>
-                        <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                          MOU&apos;s
-                        </h3>
-                        <a
-                          href="#"
-                          className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
-                        >
-                          MOU&apos;s
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Spacer Column (for submenu overflow) */}
+                  <div className="col-span-1"></div>
 
                   {/* Column 3 - Chairman's Message */}
-                  <div className="space-y-4 overflow-hidden min-w-0">
+                  <div className="space-y-4">
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
                       Chairman's Message
                     </h3>
                     <div className="flex flex-col gap-4">
-                      <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-md border-2 border-[#b77a00]/20">
+                      <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md border-2 border-[#b77a00]/20">
                         <img
-                          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400&h=400"
+                          src="/Dr.Mohan-Alva-1.jpg"
                           alt="Chairman"
                           className="w-full h-full object-cover"
                         />
@@ -516,24 +512,32 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         <h4 className="text-[0.85rem] font-bold text-[#b77a00] uppercase mb-1">
                           Dr. Mohan Alva
                         </h4>
-                        <p className="text-[0.82rem] text-[#475569] leading-relaxed italic border-l-2 border-[#b77a00]/30 pl-3 whitespace-normal break-words">
+                        <p className="text-[0.82rem] text-[#475569] leading-relaxed italic line-clamp-3 mb-3">
                           "Welcome to Alva's! Our mission is to provide
                           world-class technical education infused with cultural
                           values, shaping students into innovative leaders who
                           serve society."
                         </p>
+                        <Link
+                          href="#"
+                          className="inline-flex items-center gap-2 text-[0.75rem] font-bold text-white bg-[#b77a00] px-4 py-2 rounded-full hover:bg-[#966500] transition-colors shadow-sm"
+                        >
+                          KNOW MORE
+                          <i className="fas fa-arrow-right text-[10px]"></i>
+                        </Link>
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-4 overflow-hidden min-w-0">
+                  {/* Column 4 - Principal's Message */}
+                  <div className="space-y-4">
                     <h3 className="text-[0.9rem] font-bold text-[#1e293b] uppercase tracking-wider border-b border-[#e2e8f0] pb-2 mb-4">
-                      Principal&apos;s Message
+                      Principal's Message
                     </h3>
                     <div className="flex flex-col gap-4">
-                      <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-md border-2 border-[#b77a00]/20">
+                      <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md border-2 border-[#b77a00]/20">
                         <img
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400&h=400"
+                          src="/peter sir.webp"
                           alt="Principal"
                           className="w-full h-full object-cover"
                         />
@@ -542,12 +546,19 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         <h4 className="text-[0.85rem] font-bold text-[#b77a00] uppercase mb-1">
                           Dr. Peter Fernandes
                         </h4>
-                        <p className="text-[0.82rem] text-[#475569] leading-relaxed italic border-l-2 border-[#b77a00]/30 pl-3 whitespace-normal break-words">
+                        <p className="text-[0.82rem] text-[#475569] leading-relaxed italic line-clamp-3 mb-3">
                           "We foster an environment of academic excellence and
                           personal growth. Our state-of-the-art facilities
                           ensure students are well-prepared for the challenges
                           of future industries."
                         </p>
+                        <Link
+                          href="#"
+                          className="inline-flex items-center gap-2 text-[0.75rem] font-bold text-white bg-[#b77a00] px-4 py-2 rounded-full hover:bg-[#966500] transition-colors shadow-sm"
+                        >
+                          KNOW MORE
+                          <i className="fas fa-arrow-right text-[10px]"></i>
+                        </Link>
                       </div>
                     </div>
                   </div>

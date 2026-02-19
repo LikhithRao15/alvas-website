@@ -8,9 +8,12 @@
   --background-end-rgb: 248, 250, 252;
   --nav-cream: 255, 250, 240;
   --nav-mustard: 183, 119, 0;
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+      to bottom,
       transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 /* ============================================ */
@@ -78,7 +81,7 @@
 }
 
 /* Inner container padding - consistent for all mega menus */
-.dropdown-menu>div {
+.dropdown-menu > div {
   padding: 2rem 2.5rem !important;
 }
 
@@ -287,7 +290,7 @@
     width: calc(100% - 2rem) !important;
   }
 
-  .dropdown-menu>div {
+  .dropdown-menu > div {
     padding: 1.5rem !important;
   }
 
@@ -302,7 +305,7 @@
     width: calc(100% - 1rem) !important;
   }
 
-  .dropdown-menu>div {
+  .dropdown-menu > div {
     padding: 1.25rem !important;
   }
 
@@ -371,14 +374,47 @@
   border-left: 2px solid #e2e8f0 !important;
 }
 
-/* Disable all submenus */
-.submenu-wrapper,
-.dropdown-submenu,
-.has-submenu,
-.sub-menu,
-.children,
-.dropdown-menu .dropdown-menu {
-  display: none !important;
+/* ============================================ */
+/* NESTED DROPDOWNS STYLE */
+/* ============================================ */
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 220px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #edf2f7;
+  border-left: 3px solid rgb(var(--nav-mustard));
+  border-radius: 0 8px 8px 8px;
+  padding: 1rem !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.has-submenu:hover > .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.submenu a {
+  font-size: 0.85rem !important;
+  padding: 0.4rem 0.75rem !important;
+  border-left: none !important;
+}
+
+.submenu a:hover {
+  background: #f8fafc !important;
+  color: rgb(var(--nav-mustard)) !important;
 }
 
 /* ============================================ */
