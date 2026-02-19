@@ -87,6 +87,8 @@ export default function LifeAtAIET() {
   const handleExplore = (item: (typeof CAMPUS_DATA)[0]) => {
     if (item.title === "CLUBS & ACTIVITIES") {
       router.push("/campus-life/clubs");
+    } else if (item.title === "ACHIEVEMENTS") {
+      router.push("/campus-life/achievements");
     } else {
       console.log("No specific page for:", item.title);
     }
