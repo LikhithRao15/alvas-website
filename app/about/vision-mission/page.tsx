@@ -72,7 +72,27 @@ export default function VisionMission() {
       />
       <Header onMenuToggle={() => setIsMobileMenuOpen(true)} />
 
-      {/* Animated Background */}
+      {/* Hero Section */}
+      <section className="relative h-[60vh] w-full mt-[80px] overflow-hidden">
+        <img
+          src="/DJI_0135.jpg"
+          alt="AIET Vision and Mission"
+          className="w-full h-full object-cover"
+        />
+        {/* Shadow Overlay (Top to Bottom) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent z-10" />
+
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-7xl font-serif font-black text-white mb-4 drop-shadow-2xl italic">
+              Vision & <span className="text-yellow-400">Mission</span>
+            </h1>
+            <div className="w-24 h-1.5 bg-yellow-400 mx-auto rounded-full" />
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Background Blob */}
       <div
         ref={bgRef}
         className="fixed inset-[-10%] z-0 pointer-events-none opacity-40"
@@ -88,7 +108,7 @@ export default function VisionMission() {
 
       <div
         ref={containerRef}
-        className="relative z-10 pt-44 pb-20 px-6 max-w-5xl mx-auto"
+        className="relative z-10 pt-20 pb-20 px-6 max-w-5xl mx-auto"
       >
         {/* Vision Section */}
         <section ref={visionRef} className="mb-20">
@@ -96,11 +116,11 @@ export default function VisionMission() {
             <span className="text-amber-600 font-bold uppercase tracking-[0.3em] text-sm mb-4">
               Our Purpose
             </span>
-            <h1 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-8 tracking-tight">
+            <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-8 tracking-tight">
               Vision
-            </h1>
+            </h2>
             <div className="w-24 h-1.5 bg-amber-500 rounded-full mb-10" />
-            <p className="text-xl md:text-3xl text-slate-800 leading-relaxed font-medium max-w-4xl italic">
+            <p className="text-xl md:text-3xl text-slate-800 leading-relaxed font-medium max-w-4xl italic px-4">
               "To provide an environment for quality education and to nurture
               technical professionals with ethics, social values and skills to
               serve the society."
@@ -129,7 +149,7 @@ export default function VisionMission() {
             </h2>
             <div className="w-24 h-1.5 bg-amber-500 rounded-full mb-10" />
 
-            <p className="text-xl md:text-3xl text-slate-800 leading-relaxed font-medium max-w-4xl italic">
+            <p className="text-xl md:text-3xl text-slate-800 leading-relaxed font-medium max-w-4xl italic px-4">
               "To provide quality education through well-equipped laboratories
               and experienced faculty members, fostering an environment of
               academic excellence. We strive for the holistic development of our
