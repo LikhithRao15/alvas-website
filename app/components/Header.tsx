@@ -1027,10 +1027,21 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           </div>
 
           <div ref={placementsGroupRef} className="relative group py-4">
+<<<<<<< HEAD
+           <Link href="/placement">
+=======
             <Link href="/placement">
+>>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
             <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
               
               PLACEMENTS
+<<<<<<< HEAD
+              <i className=" text-[10px] ml-1 opacity-70"></i>
+            </button>
+            </Link>
+
+            
+=======
               <i className="text-[10px] ml-1 opacity-70 "></i>
             </button>
             </Link>
@@ -1109,6 +1120,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 </div>
               </div>
             </div> */}
+>>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
           </div>
 
           {/* ============ CAMPUS LIFE - FULL WIDTH MEGA MENU ============ */}
@@ -1358,7 +1370,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     </h3>
                     <div className="space-y-1 mb-6">
                       <a
-                        href="#"
+                        href="../campus-life/library"
                         className="block text-[0.9rem] text-[#475569] hover:text-[#b77a00] hover:pl-1 transition-all py-0.5"
                       >
                         Library

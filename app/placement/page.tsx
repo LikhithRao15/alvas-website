@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+import PlacementClient from "./PlacementClient";
+
+export default function Page() {
+  return <PlacementClient />;
+}
+=======
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -646,3 +653,4 @@ export default function PlacementPage() {
     </div>
   );
 }
+>>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a

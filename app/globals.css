@@ -468,6 +468,50 @@
   }
 }
 
+<<<<<<< HEAD
+/* placedstudents */
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-slide {
+  animation: slide 25s linear infinite;
+}
+
+/* company vited*/
+@keyframes companySlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-company-slide {
+  animation: companySlide 30s linear infinite;
+}
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+=======
 @layer utilities {
   .preserve-3d {
     transform-style: preserve-3d;
@@ -492,3 +536,4 @@
     animation: fadeIn 0.5s ease-out forwards;
   }
 }
+>>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
