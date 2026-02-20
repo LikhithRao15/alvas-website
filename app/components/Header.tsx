@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 
 interface HeaderProps {
-  onMenuToggle: () => void;
+  onMenuToggle?: () => void;
 }
 
 export default function Header({ onMenuToggle }: HeaderProps) {
@@ -357,10 +357,10 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 <div className="grid grid-cols-4 gap-6 px-2">
                   {/* Column 1 - Categories List */}
                   <div className="col-span-1 border-r border-[#e2e8f0] pr-6">
-                    <div className="flex flex-col space-y-2">
-                      {/* Institution */}
+                    <div className="flex flex-col">
+                      {/* INSTITUTION – expandable, keeps arrow */}
                       <div className="has-submenu group/sub">
-                        <div className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
+                        <div className="flex items-center justify-between text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
                           <span>INSTITUTION</span>
                           <i className="fas fa-chevron-right text-[10px] opacity-50 group-hover/sub:translate-x-1 transition-transform"></i>
                         </div>
@@ -386,9 +386,9 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         </div>
                       </div>
 
-                      {/* Accreditations */}
+                      {/* ACCREDITATIONS – expandable, keeps arrow */}
                       <div className="has-submenu group/sub">
-                        <div className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
+                        <div className="flex items-center justify-between text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
                           <span>ACCREDITATIONS</span>
                           <i className="fas fa-chevron-right text-[10px] opacity-50 group-hover/sub:translate-x-1 transition-transform"></i>
                         </div>
@@ -420,9 +420,9 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         </div>
                       </div>
 
-                      {/* Mandatory Disclosure */}
+                      {/* MANDATORY DISCLOSURE – expandable, keeps arrow */}
                       <div className="has-submenu group/sub">
-                        <div className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
+                        <div className="flex items-center justify-between text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all">
                           <span>MANDATORY DISCLOSURE</span>
                           <i className="fas fa-chevron-right text-[10px] opacity-50 group-hover/sub:translate-x-1 transition-transform"></i>
                         </div>
@@ -466,28 +466,29 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         </div>
                       </div>
 
-                      {/* MOU */}
+                      {/* MOU – direct link, no arrow */}
+
                       <Link
                         href="#"
-                        className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
+                        className="about-nav-link flex items-center text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
-                        <span>MOU</span>
+                        MOU
                       </Link>
 
-                      {/* AEF */}
+                      {/* AEF – direct link, no arrow */}
                       <Link
                         href="#"
-                        className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
+                        className="about-nav-link flex items-center text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
-                        <span>AEF</span>
+                        AEF
                       </Link>
 
-                      {/* Administration */}
+                      {/* ADMINISTRATION – direct link, no arrow */}
                       <Link
                         href="/about/administration"
-                        className="flex items-center justify-between text-[0.95rem] font-bold text-[#1e293b] hover:text-[#b77a00] cursor-pointer py-2 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
+                        className="about-nav-link flex items-center text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
-                        <span>ADMINISTRATION</span>
+                        ADMINISTRATION
                       </Link>
                     </div>
                   </div>
@@ -519,7 +520,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                           serve society."
                         </p>
                         <Link
-                          href="#"
+                          href="/about/chairmans-message"
                           className="inline-flex items-center gap-2 text-[0.75rem] font-bold text-white bg-[#b77a00] px-4 py-2 rounded-full hover:bg-[#966500] transition-colors shadow-sm"
                         >
                           KNOW MORE
@@ -553,7 +554,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                           of future industries."
                         </p>
                         <Link
-                          href="#"
+                          href="/about/principals-message"
                           className="inline-flex items-center gap-2 text-[0.75rem] font-bold text-white bg-[#b77a00] px-4 py-2 rounded-full hover:bg-[#966500] transition-colors shadow-sm"
                         >
                           KNOW MORE
@@ -1027,23 +1028,11 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           </div>
 
           <div ref={placementsGroupRef} className="relative group py-4">
-<<<<<<< HEAD
-           <Link href="/placement">
-=======
             <Link href="/placement">
->>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
-            <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
-              
-              PLACEMENTS
-<<<<<<< HEAD
-              <i className=" text-[10px] ml-1 opacity-70"></i>
-            </button>
-            </Link>
-
-            
-=======
-              <i className="text-[10px] ml-1 opacity-70 "></i>
-            </button>
+              <button className="nav-btn font-bold tracking-[1px] uppercase text-[1rem] py-[5px] flex items-center gap-1 group-hover:text-[#b77a00] transition relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-[#b77a00] after:transition-all after:duration-200 hover:after:w-full">
+                PLACEMENTS
+                <i className="text-[10px] ml-1 opacity-70"></i>
+              </button>
             </Link>
 
             {/* <div
@@ -1120,7 +1109,6 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 </div>
               </div>
             </div> */}
->>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
           </div>
 
           {/* ============ CAMPUS LIFE - FULL WIDTH MEGA MENU ============ */}

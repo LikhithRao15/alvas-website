@@ -90,23 +90,13 @@ export default function LifeAtAIET() {
   };
 
   const next = () => setActive((prev) => (prev + 1) % CAMPUS_DATA.length);
-  const prev = () => setActive((prev) => (prev - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length);
+  const prev = () =>
+    setActive((prev) => (prev - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length);
 
   // Redirection Logic
   const handleExplore = (item: (typeof CAMPUS_DATA)[0]) => {
-<<<<<<< HEAD
     if (item.href) {
       router.push(item.href);
-=======
-    if (item.title === "CLUBS & ACTIVITIES") {
-      router.push("/campus-life/clubs");
-    } else if (item.title === "ACHIEVEMENTS") {
-      router.push("/campus-life/achievements");
-    } else if (item.title === "EXPLORE") {
-      router.push("/campus-life/Explore");
-    } else {
-      console.log("No specific page for:", item.title);
->>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
     }
   };
 
@@ -116,7 +106,10 @@ export default function LifeAtAIET() {
         <title>Life @ AIET | Immersive Experience</title>
       </Head>
 
-      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
       <Header onMenuToggle={toggleMobileMenu} />
 
       {/* --- BACKGROUND LAYER --- */}
@@ -138,7 +131,8 @@ export default function LifeAtAIET() {
         <div className="slider-viewport">
           {CAMPUS_DATA.map((item, i) => {
             const isCenter = i === active;
-            const isLeft = i === (active - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length;
+            const isLeft =
+              i === (active - 1 + CAMPUS_DATA.length) % CAMPUS_DATA.length;
             const isRight = i === (active + 1) % CAMPUS_DATA.length;
 
             let pos = "hidden";
@@ -167,12 +161,18 @@ export default function LifeAtAIET() {
                   <div className="card-body">
                     <div className="badge-row">
                       <span className="glass-tag">CAMPUS</span>
-                      <span className="status-dot" style={{ backgroundColor: item.color }} />
+                      <span
+                        className="status-dot"
+                        style={{ backgroundColor: item.color }}
+                      />
                       <span className="subtitle">{item.subtitle}</span>
                     </div>
                     <h2 className="card-title">{item.title}</h2>
                     <p className="card-desc">{item.desc}</p>
-                    <button className="action-btn" onClick={() => handleExplore(item)}>
+                    <button
+                      className="action-btn"
+                      onClick={() => handleExplore(item)}
+                    >
                       <FaPlay size={10} /> EXPLORE EXPERIENCE
                     </button>
                   </div>
@@ -237,7 +237,11 @@ export default function LifeAtAIET() {
         .vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+          background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 100%
+          );
           z-index: 2;
         }
 
@@ -295,7 +299,11 @@ export default function LifeAtAIET() {
         .image-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
+          background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(0, 0, 0, 0.9)
+          );
         }
 
         .card-body {
@@ -369,7 +377,8 @@ export default function LifeAtAIET() {
 
         /* Perspective Positioning */
         .card-anchor.center {
-          transform: translate3d(0, 0, 150px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+          transform: translate3d(0, 0, 150px) rotateX(var(--tilt-x))
+            rotateY(var(--tilt-y));
           z-index: 10;
           opacity: 1;
         }
@@ -443,9 +452,15 @@ export default function LifeAtAIET() {
             width: 280px;
             height: 420px;
           }
-          .card-anchor.left { transform: translate3d(-150px, 0, -300px) rotateY(40deg); }
-          .card-anchor.right { transform: translate3d(150px, 0, -300px) rotateY(-40deg); }
-          .card-title { font-size: 1.6rem; }
+          .card-anchor.left {
+            transform: translate3d(-150px, 0, -300px) rotateY(40deg);
+          }
+          .card-anchor.right {
+            transform: translate3d(150px, 0, -300px) rotateY(-40deg);
+          }
+          .card-title {
+            font-size: 1.6rem;
+          }
         }
       `}</style>
     </div>
