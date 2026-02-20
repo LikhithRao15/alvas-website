@@ -469,7 +469,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       {/* MOU – direct link, no arrow */}
 
                       <Link
-                        href="#"
+                        href="/about/mou"
                         className="about-nav-link flex items-center text-[0.95rem] font-bold tracking-[0.03em] font-sans text-[#1e293b] hover:text-[#b77a00] py-2.5 px-3 rounded-lg hover:bg-[#f8fafc] transition-all"
                       >
                         MOU
