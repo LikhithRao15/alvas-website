@@ -44,7 +44,7 @@
 }
 
 .nav-btn {
-  font-size: 0.7rem !important;
+  font-size: 0.9rem !important;
   padding-top: 2px !important;
   padding-bottom: 2px !important;
   white-space: nowrap !important;
@@ -138,6 +138,31 @@
   text-decoration: none !important;
   border-radius: 0 !important;
   background: transparent !important;
+}
+
+/* CATEGORY-LEVEL LINKS (MOU, AEF, ADMINISTRATION) - must match the <div> category rows above them */
+.dropdown-menu a.about-nav-link {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  letter-spacing: 0.03em !important;
+  padding: 0.625rem 0.75rem !important;
+  margin: 0 !important;
+  border-radius: 0.5rem !important;
+  background: transparent !important;
+  line-height: 1.5 !important;
+  text-decoration: none !important;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease !important;
+}
+
+.dropdown-menu a.about-nav-link:hover {
+  color: #b77a00 !important;
+  background: #f8fafc !important;
+  padding-left: 0.75rem !important;
 }
 
 /* NESTED LINKS - For other tabs with indentation */
@@ -483,7 +508,7 @@
   animation: slide 25s linear infinite;
 }
 
-/* company vited*/
+/* company visited */
 @keyframes companySlide {
   0% {
     transform: translateX(0);
@@ -496,7 +521,6 @@
 .animate-company-slide {
   animation: companySlide 30s linear infinite;
 }
-
 
 @keyframes marquee {
   from {
