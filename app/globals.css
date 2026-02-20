@@ -468,7 +468,6 @@
   }
 }
 
-<<<<<<< HEAD
 /* placedstudents */
 
 @keyframes slide {
@@ -511,7 +510,7 @@
 .animate-marquee {
   animation: marquee linear infinite;
 }
-=======
+
 @layer utilities {
   .preserve-3d {
     transform-style: preserve-3d;
@@ -536,4 +535,3 @@
     animation: fadeIn 0.5s ease-out forwards;
   }
 }
->>>>>>> d77d7631be32178ade198526cdbb6982ef7cfa5a
